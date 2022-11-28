@@ -7,7 +7,7 @@ import App from '../app';
 import User from '../database/models/User';
 import {
   Login,
-  user,
+  users,
   
 } from './mocks/MockUsers';
 import * as bcrypt from 'bcryptjs';
@@ -32,7 +32,7 @@ describe('Rota de Login', () => {
   beforeEach(async () => {
     sinon
       .stub(User, "findOne")
-      .resolves(user as User);
+      .resolves(users as User);
   });
 
   afterEach(sinon.restore)

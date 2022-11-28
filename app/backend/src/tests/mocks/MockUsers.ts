@@ -4,7 +4,7 @@ export const Login = {
 }
 
 
-export const user = {
+export const users = {
   id: 1,
   username: 'Admin',
   role: 'admin',
