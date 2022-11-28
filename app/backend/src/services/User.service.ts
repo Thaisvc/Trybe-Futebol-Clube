@@ -7,6 +7,7 @@ export default class UserService {
     const { email, password } = userLogin;
 
     const user = await ModelUser.findOne({ where: { email } });
+
     if (!user) {
       throw new Error('User already exists');
     }
