@@ -8,7 +8,7 @@ export default class UserService {
 
     const user = await ModelUser.findOne({ where: { email } });
     if (!user) {
-      throw new Error('user não encontrada');
+      throw new Error('User already exists');
     }
 
     const checkPassword = user && compareSync(password, user.password);

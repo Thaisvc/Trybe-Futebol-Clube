@@ -1,6 +1,6 @@
 import * as express from 'express';
 import RouterUser from './routers/User.router';
-import 'express-async-errors';
+// import 'express-async-errors';
 import httpErrorMiddleware from './middlewares/erro.middleware';
 
 class App {
@@ -25,6 +25,7 @@ class App {
 
     this.app.use(express.json());
     this.app.use(accessControl);
+
     this.app.use('/login', RouterUser);
     this.app.use(httpErrorMiddleware);
   }
