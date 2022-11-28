@@ -4,9 +4,6 @@ export const Login = {
 }
 
 
-
-
-
 export const user = {
   id: 1,
   username: 'Admin',
