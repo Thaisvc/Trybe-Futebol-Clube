@@ -1,14 +1,16 @@
-const login = {
-  email: 'arezu@pokemail.com',
-  password: 'criptografado',
-};
+export const Login = {
+  email: "asdfas",
+  password: "secret_admin",
+}
 
- const user = {
+
+
+
+
+export const user = {
   id: 1,
-  username: 'Arezu',
+  username: 'Admin',
   role: 'admin',
-  email: 'arezu@pokemail.com',
-  password: 'criptografado',
-};
+  email: 'admin@admin.com',
+}
 
-export   {login, user};
