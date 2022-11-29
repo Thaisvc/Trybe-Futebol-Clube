@@ -10,15 +10,13 @@ import {
   HTTP_STATUS_OK,
   HTTP_UNAUTHORIZED,
   Login,
-  roleUsr,
   users,
-  usersId,
   
 } from './mocks/MockUsers';
 import * as bcrypt from 'bcryptjs';
 
 import { Response } from 'superagent';
-import * as JWT from '../utils/token'
+
 
 chai.use(chaiHttp);
 
