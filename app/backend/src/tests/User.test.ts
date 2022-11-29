@@ -10,7 +10,9 @@ import {
   HTTP_STATUS_OK,
   HTTP_UNAUTHORIZED,
   Login,
+  roleUsr,
   users,
+  usersId,
   
 } from './mocks/MockUsers';
 import * as bcrypt from 'bcryptjs';
@@ -62,5 +64,4 @@ describe('Rota de Login', () => {
     expect(chaiHttpResponse.body).to.deep.equal({ message: 'All fields must be filled' });
   });
 });
-
 
