@@ -1,26 +1,25 @@
 import { compareSync } from 'bcryptjs';
-import { IJwt, IUsers } from '../interfeces/IUser';
+import { IUsers } from '../interfeces/IUser';
 import ModelUser from '../database/models/User';
+import { createToken } from '../utils/token';
 
 export default class UserService {
-  public static async login(userLogin: IUsers): Promise<IJwt | boolean> {
+  public static async login(userLogin: IUsers): Promise<string | boolean> {
     const { email, password } = userLogin;
 
-    const user = await ModelUser.findOne({ where: { email } });
+    const checkUser = await ModelUser.findOne({ where: { email } });
 
-    if (!user) {
-      throw new Error('User already exists');
-    }
-
-    const checkPassword = user && compareSync(password, user.password);
+    const checkPassword = checkUser && compareSync(password, checkUser.password);
+    console.log(checkUser);
 
     if (checkPassword) {
-      return {
-        id: user.id,
-        username: user.username,
-        role: user.role,
-        email: user.email,
+      const checked = {
+        id: checkUser.id,
+        username: checkUser.username,
+        role: checkUser.role,
+        email: checkUser.email,
       };
+      return createToken(checked);
     }
 
     return false;

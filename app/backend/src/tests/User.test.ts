@@ -6,6 +6,9 @@ import chaiHttp = require('chai-http');
 import App from '../app';
 import User from '../database/models/User';
 import {
+  HTTP_BAD_REQUEST,
+  HTTP_STATUS_OK,
+  HTTP_UNAUTHORIZED,
   Login,
   users,
   
@@ -21,9 +24,7 @@ const { app } = new App();
 
 const { expect } = chai;
 
-const HTTP_STATUS_OK = 200;
-const HTTP_BAD_REQUEST = 400;
-const HTTP_UNAUTHORIZED = 401;
+
 
 describe('Rota de Login', () => {
 
