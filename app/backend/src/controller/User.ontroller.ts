@@ -11,10 +11,7 @@ export default class UsersController {
   }
 
   static async checkedUser(req: Request, res:Response) {
-    // console.log(req.headers.authorization);
     const verifyUser = await ServiceUser.validate(req.headers.authorization);
-    /*  console.log(verifyUser, 'lll');
-    if (!verifyUser) return res.status(400).json(verifyUser); */
     res.status(200).json(verifyUser);
   }
 }
