@@ -1,5 +1,4 @@
 import { compareSync } from 'bcryptjs';
-import HttpException from '../utils/http.exception';
 import { IUsers } from '../interfeces/IUser';
 import ModelUser from '../database/models/User';
 import Token from '../utils/token';
@@ -27,10 +26,19 @@ export default class UserService {
   }
 
   public static async validate(user: any | undefined): Promise<any> {
-    const checkedToken = Token.validateToken(user, next);
-    if (!checkedToken) { throw new HttpException(404, 'User not found'); }
+    const { data } = Token.authentication(user);
+    const { id } = data;
 
-    const findUser = await ModelUser.findByPk(checkedToken.id, { attributes: ['role'] });
-    return findUser;
+    if (!id) {
+      return { status: 401, message: { message: 'Unauthorized' } };
+    }
+
+    const result = await ModelUser.findByPk(id, { attributes: ['role'] });
+
+    if (!result) {
+      return { status: 401, message: { message: 'Unauthorized' } };
+    }
+
+    return { role: result.role };
   }
 }

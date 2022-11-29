@@ -1,6 +1,6 @@
 import { config } from 'dotenv';
-import { verify, sign } from 'jsonwebtoken';
-import { NextFunction } from 'express';
+import { sign } from 'jsonwebtoken';
+import * as JWT from 'jsonwebtoken';
 import { IJwt, IToken } from '../interfeces/IUser';
 
 config();
@@ -15,14 +15,10 @@ class Token {
     return token;
   }
 
-  static validateToken = (token: string, next: NextFunction) => {
-    try {
-      const { data } = verify(token, String(process.env.JWT_SECRET)) as IToken;
+  static authentication = (token: string) => {
+    const credential = JWT.verify(token, String(process.env.JWT_SECRET));
 
-      return data;
-    } catch (error) {
-      return next({ status: 401, message: 'Token must be a valid token' });
-    }
+    return credential as IToken;
   };
 }
 
