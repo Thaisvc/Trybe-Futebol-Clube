@@ -10,4 +10,14 @@ export default class Teams {
       res.status(400).json({ error: 'algo deu errado' });
     }
   }
+
+  static async getIdTeam(req: Request, res: Response) {
+    const { id } = req.params;
+    try {
+      const getId = await ServiceTeam.teamGetId(Number(id));
+      res.status(200).json(getId);
+    } catch (error) {
+      res.status(400).json({ error: 'algo deu errado' });
+    }
+  }
 }
