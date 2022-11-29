@@ -1,7 +1,8 @@
 import { compareSync } from 'bcryptjs';
+import HttpException from '../utils/http.exception';
 import { IUsers } from '../interfeces/IUser';
 import ModelUser from '../database/models/User';
-import { createToken } from '../utils/token';
+import Token from '../utils/token';
 
 export default class UserService {
   public static async login(userLogin: IUsers): Promise<string | boolean> {
@@ -19,9 +20,17 @@ export default class UserService {
         role: checkUser.role,
         email: checkUser.email,
       };
-      return createToken(checked);
+      return Token.createToken(checked);
     }
 
     return false;
+  }
+
+  public static async validate(user: any | undefined): Promise<any> {
+    const checkedToken = Token.validateToken(user, next);
+    if (!checkedToken) { throw new HttpException(404, 'User not found'); }
+
+    const findUser = await ModelUser.findByPk(checkedToken.id, { attributes: ['role'] });
+    return findUser;
   }
 }

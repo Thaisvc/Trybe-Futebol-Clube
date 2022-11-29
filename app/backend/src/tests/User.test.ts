@@ -38,7 +38,7 @@ describe('Rota de Login', () => {
 
   afterEach(sinon.restore)
 
-  it('Retorna um token e status 200 ao fazer login', async () => {
+  it('Retorna um token e status 200 ao fazer login co sucesso', async () => {
     sinon.stub(bcrypt, "compareSync").returns(true);
     chaiHttpResponse = await chai.request(app).post('/login').send(Login);
 
@@ -46,7 +46,7 @@ describe('Rota de Login', () => {
     expect(chaiHttpResponse.body.token).to.be.an('string');
   });
 
-  it('Retorna "Incorrect email or password" e status 401 caso algum dos dados de login estejam invalidos', async () => {
+  it('Retorna "Incorrect email or password" e status 401 caso algum dos dados  estejam invalidos', async () => {
     sinon.stub(bcrypt, "compareSync").returns(false);
     chaiHttpResponse = await chai.request(app).post('/login').send(Login);
 
