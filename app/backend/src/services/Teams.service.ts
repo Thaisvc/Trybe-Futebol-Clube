@@ -1,4 +1,4 @@
-import { ITeams } from '../interfeces/ITeam';
+import ITeams from '../interfeces/ITeam';
 import ModelTeams from '../database/models/Team';
 
 export default class TeamService {
