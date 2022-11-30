@@ -1,4 +1,4 @@
-import IMatch from '../interfeces/IMatche';
+import IMatch, { IMatchesupdate } from '../interfeces/IMatche';
 import Team from '../database/models/Team';
 import ModelMatch from '../database/models/Match';
 
@@ -45,4 +45,13 @@ export default class MatchesService {
     });
     return matchFalse;
   }; */
+
+  static async createdMatches(match: IMatchesupdate) {
+    const create = await ModelMatch.create({
+      ...match, inProgress: true,
+    });
+    console.log(create);
+
+    return create;
+  }
 }

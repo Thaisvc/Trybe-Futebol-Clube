@@ -13,4 +13,9 @@ export default class MatcheController {
       res.status(200).json(getAllMatches);
     }
   }
+
+  static async createMatches(req: Request, res: Response): Promise<void> {
+    const matchsCreate = await ServiceMatches.createdMatches(req.body);
+    res.status(201).json(matchsCreate);
+  }
 }

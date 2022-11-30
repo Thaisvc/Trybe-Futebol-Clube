@@ -10,3 +10,10 @@ export default interface IMatch {
   teamHome?: ITeams;
   teamAway?: ITeams;
 }
+
+export interface IMatchesupdate {
+  homeTeam: number,
+  awayTeam: number,
+  homeTeamGoals: number,
+  awayTeamGoals: number,
+}
