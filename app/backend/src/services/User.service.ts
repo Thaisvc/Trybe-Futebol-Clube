@@ -23,7 +23,7 @@ export default class UserService {
   }
 
   public static async validate(user: string | any): Promise<string | object> {
-    const { data } = Token.authentication(user);
+    const { data } = Token.authent(user);
     const { id } = data;
 
     if (!id) {
