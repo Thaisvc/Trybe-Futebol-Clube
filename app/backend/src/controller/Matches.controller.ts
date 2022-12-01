@@ -15,10 +15,12 @@ export default class MatcheController {
   }
 
   static async createMatches(req: Request, res: Response): Promise<void> {
-    const { statusCode, message } = await ServiceMatches.createdMatches(req.body);
-    console.log(statusCode, message);
-
-    res.status(statusCode).json(message);
+    const check = await ServiceMatches.checkExists(req.body);
+    if (typeof check === 'object') {
+      res.status(404).json(check);
+    }
+    const created = await ServiceMatches.createdMatches(req.body);
+    res.status(201).json(created);
   }
 
   static async MatchUpdate(req: Request, res: Response): Promise<void> {

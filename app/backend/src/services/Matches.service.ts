@@ -1,5 +1,5 @@
-import ErrorHttp, { HttpCode } from '../utils/http.exception';
-import IMatch, { IMatchesupdate } from '../interfeces/IMatche';
+// import ErrorHttp, { HttpCode } from '../utils/http.exception';
+import IMatch from '../interfeces/IMatche';
 import Team from '../database/models/Team';
 import ModelMatch from '../database/models/Match';
 
@@ -14,13 +14,15 @@ export default class MatchesService {
     return matches;
   }
 
-  static async matcheQuery(param: string) : Promise <IMatch[]> {
+  static async matcheQuery(param: string): Promise<IMatch[]> {
     const inProgress = JSON.parse(param);
-    const result = await ModelMatch.findAll({ where: { inProgress },
+    const result = await ModelMatch.findAll({
+      where: { inProgress },
       include: [
         { model: Team, as: 'teamHome' },
         { model: Team, as: 'teamAway' },
-      ] });
+      ],
+    });
     return result;
   }
 
@@ -47,27 +49,27 @@ export default class MatchesService {
     return matchFalse;
   }; */
 
-  static async createdMatches(match: IMatchesupdate): Promise<any> {
-    const { homeTeam } = match;
-    this.checkExists(homeTeam);
-    const create = await ModelMatch.create({
-      ...match, inProgress: true,
-    });
-    console.log(create);
-
-    return create;
-  }
-
-  static async updateMatch(id:number) {
+  static async updateMatch(id: number) {
     const result = await ModelMatch.update({ inProgress: false }, { where: { id } });
     return { type: null, message: result };
   }
 
-  static async checkExists(id:number) {
+  static async checkExists(match: any) {
+    const { homeTeam } = match;
+    const id = Number(homeTeam);
     const verify = await Team.findAll({ where: { id } });
     if (verify.length === 0) {
-      throw new ErrorHttp(HttpCode.NOT_FOUND, 'There is no team with such id!');
+      // throw new ErrorHttp(HttpCode.NOT_FOUND, 'There is no team with such id!');
+      return { message: 'There is no team with such id!' };
     }
-    // return verify;
+    //  MatchesService.createdMatches(match);
+  }
+
+  static async createdMatches(match: any): Promise<any> {
+    const create = await ModelMatch.create({
+      ...match, inProgress: true,
+    });
+
+    return create;
   }
 }
