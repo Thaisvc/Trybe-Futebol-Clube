@@ -1,3 +1,4 @@
+import ErrorHttp, { HttpCode } from '../utils/http.exception';
 import IMatch, { IMatchesupdate } from '../interfeces/IMatche';
 import Team from '../database/models/Team';
 import ModelMatch from '../database/models/Match';
@@ -47,6 +48,8 @@ export default class MatchesService {
   }; */
 
   static async createdMatches(match: IMatchesupdate) {
+    const { homeTeam } = match;
+    this.checkExists(homeTeam);
     const create = await ModelMatch.create({
       ...match, inProgress: true,
     });
@@ -57,5 +60,13 @@ export default class MatchesService {
   static async updateMatch(id:number) {
     const result = await ModelMatch.update({ inProgress: false }, { where: { id } });
     return { type: null, message: result };
+  }
+
+  static async checkExists(id:number) {
+    const verify = await Team.findAll({ where: { id } });
+    if (verify.length === 0) {
+      throw new ErrorHttp(HttpCode.NOT_FOUND, 'There is no team with such id!');
+    }
+    // return verify;
   }
 }
