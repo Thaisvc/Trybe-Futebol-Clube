@@ -1,2 +1,2 @@
-npm install joi
+joi
 express-async-errors

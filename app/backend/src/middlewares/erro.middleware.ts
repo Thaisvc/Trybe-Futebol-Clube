@@ -7,9 +7,9 @@ const httpErrorMiddleware = (
   res: Response,
   next: NextFunction,
 ) => {
-  const { status, message } = err as HttpException;
-  if (status) {
-    return res.status(status || 500).json({ message });
+  const { statusCode, message } = err as HttpException;
+  if (statusCode) {
+    return res.status(statusCode || 500).json({ message });
   }
   next();
 };

@@ -47,12 +47,13 @@ export default class MatchesService {
     return matchFalse;
   }; */
 
-  static async createdMatches(match: IMatchesupdate) {
+  static async createdMatches(match: IMatchesupdate): Promise<any> {
     const { homeTeam } = match;
     this.checkExists(homeTeam);
     const create = await ModelMatch.create({
       ...match, inProgress: true,
     });
+    console.log(create);
 
     return create;
   }

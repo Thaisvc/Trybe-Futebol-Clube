@@ -9,12 +9,12 @@ export enum HttpCode {
   INTERNAL_SERVER_ERROR = 500,
 }
 export default class ErrorHttp extends Error {
-  public readonly status: HttpCode;
+  public readonly statusCode: HttpCode;
   public readonly message: string;
 
-  constructor(status: number, message: string) {
+  constructor(statusCode: number, message: string) {
     super(message);
-    this.status = status;
+    this.statusCode = statusCode;
     this.message = message;
   }
 }
