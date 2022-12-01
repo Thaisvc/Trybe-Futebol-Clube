@@ -17,8 +17,8 @@ export default class MatchesService {
     const inProgress = JSON.parse(param);
     const result = await ModelMatch.findAll({ where: { inProgress },
       include: [
-        { model: Team, as: 'teamHome', attributes: { exclude: [] } },
-        { model: Team, as: 'teamAway', attributes: { exclude: [] } },
+        { model: Team, as: 'teamHome' },
+        { model: Team, as: 'teamAway' },
       ] });
     return result;
   }
@@ -30,8 +30,8 @@ export default class MatchesService {
       const matchTrue = await ModelMatch.findAll({
         where: { inProgress: true },
         include: [
-          { model: Team, as: 'teamHome' },
-          { model: Team, as: 'teamAway' },
+          { model: Team, as: 'teamHome', attributes: { exclude: ['id'] } },
+          { model: Team, as: 'teamAway', attributes: { exclude: ['id'] } },
         ],
       });
       return matchTrue;
@@ -50,8 +50,12 @@ export default class MatchesService {
     const create = await ModelMatch.create({
       ...match, inProgress: true,
     });
-    console.log(create);
 
     return create;
+  }
+
+  static async updateMatch(id:number) {
+    const result = await ModelMatch.update({ inProgress: false }, { where: { id } });
+    return { type: null, message: result };
   }
 }

@@ -18,4 +18,9 @@ export default class MatcheController {
     const matchsCreate = await ServiceMatches.createdMatches(req.body);
     res.status(201).json(matchsCreate);
   }
+
+  static async MatchUpdate(req: Request, res: Response): Promise<void> {
+    await ServiceMatches.updateMatch(Number(req.params.id));
+    res.status(200).json({ message: 'Finished' });
+  }
 }
