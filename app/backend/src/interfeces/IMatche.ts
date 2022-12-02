@@ -12,8 +12,6 @@ export default interface IMatch {
 }
 
 export interface IMatchesupdate {
-  homeTeam: number,
-  awayTeam: number,
   homeTeamGoals: number,
   awayTeamGoals: number,
 }

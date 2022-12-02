@@ -1,5 +1,5 @@
 // import ErrorHttp, { HttpCode } from '../utils/http.exception';
-import IMatch from '../interfeces/IMatche';
+import IMatch, { IMatchesupdate } from '../interfeces/IMatche';
 import Team from '../database/models/Team';
 import ModelMatch from '../database/models/Match';
 
@@ -71,5 +71,17 @@ export default class MatchesService {
     });
 
     return create;
+  }
+
+  static async updateMatcheInProgress(payload:IMatchesupdate, id:number) {
+    const { homeTeamGoals, awayTeamGoals } = payload;
+    await ModelMatch.update({ homeTeamGoals, awayTeamGoals }, { where: { id } });
+    const updated = MatchesService.getMatchById(id);
+    return updated;
+  }
+
+  static async getMatchById(id:number): Promise<IMatch | null> {
+    const result = await ModelMatch.findOne({ where: { id } });
+    return result;
   }
 }
