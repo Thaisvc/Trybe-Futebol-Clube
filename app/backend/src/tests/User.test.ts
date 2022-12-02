@@ -38,7 +38,7 @@ describe('Rota de Login', () => {
 
   afterEach(sinon.restore)
 
-  it('Retorna um token e status 200 ao fazer login co sucesso', async () => {
+  it('Retorna um token e status 200 ao fazer login com sucesso', async () => {
     sinon.stub(bcrypt, "compareSync").returns(true);
     chaiHttpResponse = await chai.request(app).post('/login').send(Login);
 

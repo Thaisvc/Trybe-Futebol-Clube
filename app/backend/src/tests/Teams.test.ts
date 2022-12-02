@@ -28,25 +28,30 @@ const { expect } = chai;
 
 describe('Rota de Teams', () => {
 
-  let chaiHttpResponse: Response;
-
   beforeEach(async () => {
     sinon
       .stub(TeamModel, "findAll")
       .resolves(teamsAll as TeamModel[]);
-  });
+    });
+    
+    it('Testa se GT traz todos os times', async () => {
+      const result = await chai.request(app).get('/teams');
+      
+      expect(result).to.have.status(200);
+      expect(result.body).to.be.an('array');
+      expect(result.body).to.deep.equal(teamsAll);
+    })
 
+    it('Testa se encontra time pelo id', async () => {
+      const result = await chai.request(app).get('/teams/1');      
 
-  afterEach(sinon.restore)
+      expect(result).to.have.status(200);
+      expect(result.body).to.deep.equal(teamsAll[0]);
+    });
 
-  it('Testa se GET encontra todos os times', async () => {
-    sinon.stub(TeamModel, "findAll").resolves(teamsAll as TeamModel[]);
-    chaiHttpResponse = await chai.request(app).post('/teams').send();
-
-    expect(chaiHttpResponse.status).to.be.eq(HTTP_STATUS_OK);
-    expect(chaiHttpResponse.body).to.deep.equal(teamsAll)
-  });
-
+    afterEach(()=>{
+      (TeamModel.findAll as sinon.SinonStub).restore();
+    })
   
 });
 
