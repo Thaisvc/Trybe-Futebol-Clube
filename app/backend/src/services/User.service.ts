@@ -35,7 +35,6 @@ export default class UserService {
     if (!result) {
       return { status: 401, message: { message: 'Unauthorized' } };
     }
-    console.log(result.role, 'dd');
 
     return result.role;
   }
