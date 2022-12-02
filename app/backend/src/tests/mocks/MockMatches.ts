@@ -20,3 +20,47 @@ export const MatchesAll = [
     }
   },
   ]
+
+  export const InProgressTrue = [
+    {
+      "id": 41,
+      "homeTeam": 16,
+      "homeTeamGoals": 2,
+      "awayTeam": 9,
+      "awayTeamGoals": 0,
+      "inProgress": true,
+      "teamHome": {
+        "id": 16,
+        "teamName": "São Paulo"
+      },
+      "teamAway": {
+        "id": 9,
+        "teamName": "Internacional"
+      }
+    }]
+    
+    export const mockTeam = { id: 16, teamName: 'São Paulo'};
+    export const sucessMatchMock = {
+      id: 12,
+      homeTeam: 16,
+      homeTeamGoals: 2,
+      awayTeam: 8,
+      awayTeamGoals: 2,
+      inProgress: true,
+    }
+
+    export const addMatche = {
+      homeTeam: 1,
+      awayTeam: 1,
+      homeTeamGoals: 2,
+      awayTeamGoals: 2,
+    }
+
+
+
+    export const TeamNoExist =  {
+      homeTeam: 99,
+      awayTeam: 5,
+      homeTeamGoals: 2,
+      awayTeamGoals: 2,
+    }
