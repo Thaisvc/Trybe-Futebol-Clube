@@ -1,4 +1,4 @@
-export enum HttpCode {
+export enum Code {
   OK = 200,
   CREATE = 201,
   NO_CONTENT = 204,
@@ -9,7 +9,7 @@ export enum HttpCode {
   INTERNAL_SERVER_ERROR = 500,
 }
 export default class ErrorHttp extends Error {
-  public readonly statusCode: HttpCode;
+  public readonly statusCode: Code;
   public readonly message: string;
 
   constructor(statusCode: number, message: string) {

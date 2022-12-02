@@ -59,7 +59,7 @@ export default class MatchesService {
     const id = Number(homeTeam);
     const verify = await Team.findAll({ where: { id } });
     if (verify.length === 0) {
-      // throw new ErrorHttp(HttpCode.NOT_FOUND, 'There is no team with such id!');
+      // throw new ErrorHttp(Code.NOT_FOUND, 'There is no team with such id!');
       return { message: 'There is no team with such id!' };
     }
     //  MatchesService.createdMatches(match);
