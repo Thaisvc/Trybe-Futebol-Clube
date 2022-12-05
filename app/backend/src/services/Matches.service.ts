@@ -59,11 +59,22 @@ export default class MatchesService {
     const id = Number(homeTeam);
     const verify = await Team.findAll({ where: { id } });
     if (verify.length === 0) {
-      // throw new ErrorHttp(Code.NOT_FOUND, 'There is no team with such id!');
       return { message: 'There is no team with such id!' };
     }
     //  MatchesService.createdMatches(match);
   }
+
+  /*  OBS
+  static async checkExists(match: any): Promise<any> {
+    const { homeTeam } = match;
+    const id = Number(homeTeam);
+    const result = await Team.findAll({ where: { id } });
+    if (result.length === 0) {
+      return { statusCode: Code.NOT_FOUND, message: 'There is no team with such id!' }; CAPTURA O ERRO
+      // throw new ErrorHttp(Code.NOT_FOUND, 'There is no team with such id!'); LANÇA O ERRO
+    //  MatchesService.createdMatches(match);
+    }
+  } */
 
   static async createdMatches(match: any): Promise<any> {
     const create = await ModelMatch.create({
