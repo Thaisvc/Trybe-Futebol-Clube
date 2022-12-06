@@ -17,7 +17,6 @@ class Token {
 
   static authent = (token: string) => {
     const credential = JWT.verify(token, String(process.env.JWT_SECRET));
-
     return credential as IToken;
   };
 }

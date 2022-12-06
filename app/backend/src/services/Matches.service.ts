@@ -1,4 +1,4 @@
-// import ErrorHttp, { HttpCode } from '../utils/http.exception';
+// import ErrorHttp, { Code } from '../utils/http.exception';
 import IMatch, { IMatchesupdate } from '../interfeces/IMatche';
 import Team from '../database/models/Team';
 import ModelMatch from '../database/models/Match';
@@ -54,31 +54,20 @@ export default class MatchesService {
     return { type: null, message: result };
   }
 
-  static async checkExists(match: any) {
+  static async checkExists(match: any): Promise<any> {
     const { homeTeam } = match;
     const id = Number(homeTeam);
     const verify = await Team.findAll({ where: { id } });
     if (verify.length === 0) {
       return { message: 'There is no team with such id!' };
+      // throw new ErrorHttp(Code.NOT_FOUND, 'There is no team with such id!');
     }
     //  MatchesService.createdMatches(match);
   }
 
-  /*  OBS
-  static async checkExists(match: any): Promise<any> {
-    const { homeTeam } = match;
-    const id = Number(homeTeam);
-    const result = await Team.findAll({ where: { id } });
-    if (result.length === 0) {
-      return { statusCode: Code.NOT_FOUND, message: 'There is no team with such id!' }; CAPTURA O ERRO
-      // throw new ErrorHttp(Code.NOT_FOUND, 'There is no team with such id!'); LANÇA O ERRO
-    //  MatchesService.createdMatches(match);
-    }
-  } */
-
   static async createdMatches(match: any): Promise<any> {
     const create = await ModelMatch.create({
-      ...match, inProgress: true,
+      ...match, inProgress: 1,
     });
 
     return create;

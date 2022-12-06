@@ -16,5 +16,6 @@ export default class ErrorHttp extends Error {
     super(message);
     this.statusCode = statusCode;
     this.message = message;
+    console.log(statusCode, message, 'erro');
   }
 }

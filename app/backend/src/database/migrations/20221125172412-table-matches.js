@@ -15,10 +15,12 @@ module.exports = {
           key: 'id'
         },
       },
+
       home_team_goals: {
         allowNull: false,
         type: Sequelize.INTEGER
       },
+      
       away_team: {
         allowNull: false,
         type: Sequelize.INTEGER,
