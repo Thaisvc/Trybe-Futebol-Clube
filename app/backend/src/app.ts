@@ -29,10 +29,10 @@ class App {
     this.app.use(express.json());
     this.app.use(accessControl);
 
+    this.app.use('/leaderboard', RouterLeaderboard);
     this.app.use('/login', RouterUser);
     this.app.use('/teams', RouterTeam);
     this.app.use('/matches', RouterMatches);
-    this.app.use('/leaderboard', RouterLeaderboard);
     this.app.use(httpErrorMiddleware);
   }
 
