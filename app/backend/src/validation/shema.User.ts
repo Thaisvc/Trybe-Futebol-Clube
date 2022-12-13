@@ -1,16 +1,26 @@
-/* import Joi = require('joi');
+/* import * as Joi from 'joi';
 
-const shemaLogin: Joi.Schema = Joi.object({
-  email: Joi.string().required().messages({
+const filedsInvalids = 'All fields must be filled';
 
-    'string.email': 'Incorrect email or password',
+const schemaId = Joi.number().integer().required();
 
-  }),
-  password: Joi.string().required().messages({
-    'any.required': 'All fields must be filled',
-    /* 'string.email': 'O {{#label}} deve ter o formato "email@email.com"',
-    'string.empty': SCHEMA,
-  }),
+const schemaUsers = Joi.object({
+  email: Joi.string().email().min(3).required()
+    .messages({
+      'string.empty': filedsInvalids,
+      'any.required': filedsInvalids,
+      'string.email': 'Incorrect email or password',
+    }),
+  password: Joi.string().min(6).required()
+    .messages({
+      'string.empty': filedsInvalids,
+      'any.required': filedsInvalids,
+    }),
 });
+
+export {
+  schemaUsers,
+  schemaId,
+};
 
 export default shemaLogin; */
