@@ -7,9 +7,9 @@ export default class LeaderboardController {
     res.status(200).json(all);
   }
 
-  /* static async getAllFilter(req: Request, res: Response) {
+  static async getAllFilter(req: Request, res: Response) {
     const path = req.path.replace('/', '');
     const filter = await Leaderboard.getAllLeaderboardFilter(path);
     res.status(200).json(filter);
-  } */
+  }
 }

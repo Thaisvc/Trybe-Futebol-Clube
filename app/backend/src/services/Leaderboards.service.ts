@@ -1,4 +1,4 @@
-import Matches from '../database/models/Match';
+import Match from '../database/models/Match';
 import Teams from '../database/models/Team';
 
 import IMatches, { ILeaderBoard } from '../interfeces/ILeaderboard';
@@ -46,8 +46,8 @@ export default class ServiceLeaderBoard {
   static async getTeamsAlls(): Promise<ILeaderBoard[]> {
     const matchesAllsFinish = await Teams.findAll({
       include: [
-        { model: Matches, as: 'teamHome', where: { inProgress: false } },
-        { model: Matches, as: 'teamAway', where: { inProgress: false } },
+        { model: Match, as: 'teamHome', where: { inProgress: false } },
+        { model: Match, as: 'teamAway', where: { inProgress: false } },
       ],
     });
 
@@ -65,7 +65,7 @@ export default class ServiceLeaderBoard {
 
     const matchesAllsFinish = await Teams.findAll({
       include: [
-        { model: Matches, as: teamHomeOrAway, where: { inProgress: false } },
+        { model: Match, as: teamHomeOrAway, where: { inProgress: false } },
       ],
     });
 
